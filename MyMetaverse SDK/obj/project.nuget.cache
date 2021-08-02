@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "2uhVazlqwJwMIHDSOqy5SY629z/RX8RAL6ZEQJjSrcZ+uoTALgrjXYC5p2R/Nze8Ns/z8j/n/hjOQKEOEnb7zg==",
+  "success": true,
+  "projectFilePath": "G:\\MyMetaverse\\C#\\MyMetaverse SDK\\MyMetaverse SDK\\MyMetaverse.SDK.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ahmed\\.nuget\\packages\\restsharp\\106.12.0\\restsharp.106.12.0.nupkg.sha512"
+  ],
+  "logs": []
+}

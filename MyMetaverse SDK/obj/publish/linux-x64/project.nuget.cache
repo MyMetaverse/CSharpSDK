@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ps7WEmOVltb14lfhBEbs8tzHC37YEQMlJrLY8m1P16euLOPJn/32jGzKm/VslSq226WeuzBTqI0GX8+m/bI+eA==",
+  "success": true,
+  "projectFilePath": "G:\\MyMetaverse\\C#\\MyMetaverse SDK\\MyMetaverse SDK\\MyMetaverse.SDK.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\3.1.12\\microsoft.netcore.app.runtime.linux-x64.3.1.12.nupkg.sha512",
+    "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\3.1.12\\microsoft.aspnetcore.app.runtime.linux-x64.3.1.12.nupkg.sha512"
+  ],
+  "logs": []
+}
