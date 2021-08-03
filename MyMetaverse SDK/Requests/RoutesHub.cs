@@ -7,7 +7,7 @@ namespace MyMetaverse_SDK.Requests
 {
     public class RoutesHub : RouteAdapter
     {
-        public RoutesHub() : base("https://devcloud.mymetaverse.io/")
+        public RoutesHub(string baseUrl) : base(baseUrl)
         {
             routes.Add(
                 Routes.Routes.GEN_TOKEN, 

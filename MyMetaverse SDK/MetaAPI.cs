@@ -1,6 +1,9 @@
-﻿using MyMetaverse_SDK.Requests;
-using MyMetaverse_SDK.Requests.Models;
+﻿using MyMetaverse_SDK.Meta.Entites;
+using MyMetaverse_SDK.Requests;
+using MyMetaverse_SDK.Requests.Models.Entities;
+using MyMetaverse_SDK.Requests.Models.Responses;
 using MyMetaverse_SDK.Requests.Routes;
+using MyMetaverse_SDK.Requests.Token;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,61 +13,29 @@ namespace MyMetaverse_SDK
 {
     public class MetaAPI
     {
-        private TokenResponse _token; 
-        private MetaConnector _connector;
-        private string client_id;
-        private string client_secret;
-
-        public MetaAPI()
+        private RouteAdapter routes;
+        private OAuthToken tokenHandler;
+        private MetaConnector metaConnector;
+        public MetaAPI(OAuthToken tokenHandler)
         {
-            RoutesHub routes = new RoutesHub();
-            _connector = new MetaConnector(routes);
+            RoutesHub _routes = new RoutesHub("https://devcloud.mymetaverse.io/adopters");
+            routes = _routes;
+            this.tokenHandler = tokenHandler;
         }
-        public MetaAPI(RouteAdapter customRouting)
+        public MetaAPI WithCustomRoutes(RouteAdapter _routes)
         {
-            _connector = new MetaConnector(customRouting);
-        }
-        public MetaAPI WithCredentials(string client_id,string client_secret)
-        {
-            this.client_id = client_id;
-            this.client_secret = client_secret;
+            routes = _routes;
             return this;
         }
-        public MetaAPI WithStaticToken(string token)
+        public MetaAPI Build()
         {
-            _token = new TokenResponse();
-            _token.accessToken = token;
-            return this;
-        }
-        public async Task<MetaAPI> Build()
-        {
-            if (!string.IsNullOrEmpty(client_id) && !string.IsNullOrEmpty(client_secret))
-                _token = await _connector.RequestToken(client_id, client_secret);
-            else if (_token != null && !string.IsNullOrEmpty(_token.accessToken))
-                return this;
-            else
-                throw new Exception("Missing Credentials or Static token.");
-
+            metaConnector = new MetaConnector(tokenHandler, routes);
             return this;
         }
 
-        public async Task<TokenResponse> RequestToken()
+        public GameEntity BuildPlayer(string playerID)
         {
-            if (!string.IsNullOrEmpty(client_id) && !string.IsNullOrEmpty(client_secret))
-                _token = await _connector.RequestToken(client_id, client_secret);
-            else
-                throw new Exception("Client_id or Client_secret is missing, Please use [WithCredentials(string client_id, string client_secret)] to supply the missing values");
-            return _token;
+            return new GameEntityImpl();
         }
-        public async Task<TokenResponse> RefreshToken()
-        {
-            if (_token != null && !string.IsNullOrEmpty(_token.refreshToken))
-                _token = await _connector.RefreshToken(_token.refreshToken);
-            else
-                throw new Exception("Refresh token is missing.");
-
-            return _token;
-        }
-        public TokenResponse GetToken() => _token;
     }
 }

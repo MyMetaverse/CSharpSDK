@@ -1,5 +1,6 @@
-﻿using MyMetaverse_SDK.Requests.Models;
+﻿using MyMetaverse_SDK.Requests.Models.Requests;
 using MyMetaverse_SDK.Requests.Routes;
+using MyMetaverse_SDK.Requests.Token;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,21 @@ namespace MyMetaverse_SDK.Requests
     public class BaseConnector
     {
         private RestClient _cliet;
+        private OAuthToken tokenHandler;
+        public BaseConnector(string baseUrl, OAuthToken tokenHandler)
+        {
+            _cliet = new RestClient(baseUrl);
+            this.tokenHandler = tokenHandler;
+        }
         public BaseConnector(string baseUrl)
         {
             _cliet = new RestClient(baseUrl);
         }
-        protected async Task<RequestResult<T>> ProcessRequest<T>(Route route, string token = null, params string[] parameters)
+        public async Task<RequestResult<T>> ProcessRequest<T>(Route route, params string[] parameters)
         {
             RestRequest request = new RestRequest(route.Endpoint, route.Method);
-            if (route.AuthRequired && token != null)
-                request.AddHeader("Authorization", "Bearer " + token);
+            if (route.AuthRequired)
+                request.AddHeader("Authorization", "Bearer " + await tokenHandler.GetTokenAsync());
 
             if (route.GotFixedParams)
             {

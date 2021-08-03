@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyMetaverse_SDK.Requests.Token;
 using System;
 
 namespace MetaAPI.Tests
@@ -6,20 +7,12 @@ namespace MetaAPI.Tests
     [TestClass]
     public class UnitTest1
     {
-        private MyMetaverse_SDK.MetaAPI MetaAPI;
-        [TestInitialize]
-        public async System.Threading.Tasks.Task InitializeAsync()
-        {
-            MetaAPI = await new MyMetaverse_SDK.MetaAPI().WithCredentials("60a6be577a0ef3d457ba449f", "ZyOJhrdaFPznsHFhhwhLDVEWT0740Tjq").Build();
-        }
         [TestMethod]
         public async System.Threading.Tasks.Task TestMethod1Async()
         {
-            var token = MetaAPI.GetToken();
-            System.Console.WriteLine($"[{DateTime.Now}]Request Completed, Token: " + token.accessToken);
-
-            token = await MetaAPI.RefreshToken();
-            Console.WriteLine($"New Token is: " + token.accessToken);
+            OAuthToken tokenHandler = await OAuthToken.CreateAsync("60a6be577a0ef3d457ba449f", "ZyOJhrdaFPznsHFhhwhLDVEWT0740Tjq");
+            var MetaAPI = await new MyMetaverse_SDK.MetaAPI().WithTokenHandler(tokenHandler).Build();
+            await tokenHandler.RefreshToken();
         }
     }
 }
