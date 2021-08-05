@@ -11,7 +11,7 @@ namespace MyMetaverse_SDK.Requests.Routes
         public Method Method { get => method; }
 
         private string endPoint;
-        public string Endpoint { get => endPoint; }
+        public string Endpoint => endPoint;
 
         public bool GotFixedParams { get; private set; }
         private Dictionary<string, string> fixedParams;
@@ -20,22 +20,22 @@ namespace MyMetaverse_SDK.Requests.Routes
         public bool GotDynamicParams { get; private set; }
         private List<string> dynamicParams;
         public List<string> DynamicParams { get => dynamicParams; }
-
         public bool AuthRequired { get; private set; }
 
-        public Route(Method method, string endPoint, bool authRequired = false)
+        public Route(Method method, string endPoint, bool authRequired = true)
         {
             this.method = method;
             this.endPoint = endPoint;
+            AuthRequired = authRequired;
         }
         public Route AddFixedParams(string param1,string param2)
         {
             GotFixedParams = true;
 
-            if (this.fixedParams == null)
-                this.fixedParams = new Dictionary<string, string>();
+            if (fixedParams == null)
+                fixedParams = new Dictionary<string, string>();
 
-            this.fixedParams.Add(param1, param2);
+            fixedParams.Add(param1, param2);
             return this;
         }
         public Route AddDynamicParams(string param)

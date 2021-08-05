@@ -15,6 +15,11 @@ namespace MyMetaverse_SDK.Requests.Models.Requests
             Data = data;
             Error = error;
         }
+        public RequestResult(bool isSuccessful, RequestError error = null)
+        {
+            IsSuccessful = isSuccessful;
+            Error = error;
+        }
 
         public Exception Exception()
         {

@@ -1,0 +1,44 @@
+WalletItemImpl{ name='EFI Genesis', tokenId='70c00000000001dc', tokenIndexes=[0000000000001281], NFT=True, amount=1, metadata='https://jumpnet.cloud.enjin.io/platform/17/assets/{id}.json'}
+WalletItemImpl{ name='Human Warrior 1', tokenId='5040000000000107', tokenIndexes=[], NFT=False, amount=3, metadata='https://kepithorstudios.com/itemdata?token_index=5040000000000107000000000000000000000000000000000'}
+WalletItemImpl{ name='Crimson Paladin', tokenId='5840000000000340', tokenIndexes=[], NFT=False, amount=1, metadata='https://kepithorstudios.com/itemdata?token_index=5840000000000340000000000000000000000000000000000'}
+WalletItemImpl{ name='Squires Gauntlets', tokenId='5040000000000306', tokenIndexes=[], NFT=False, amount=3, metadata='https://kepithorstudios.com/itemdata?token_index=5040000000000306000000000000000000000000000000000'}
+WalletItemImpl{ name='Early Access', tokenId='5040000000000341', tokenIndexes=[], NFT=False, amount=1, metadata='https://kepithorstudios.com/itemdata?token_index=5040000000000341000000000000000000000000000000000'}
+WalletItemImpl{ name='Squires Boots', tokenId='5040000000000304', tokenIndexes=[], NFT=False, amount=3, metadata='https://kepithorstudios.com/itemdata?token_index=5040000000000304000000000000000000000000000000000'}
+WalletItemImpl{ name='Skeleton Warlock 1', tokenId='5040000000000174', tokenIndexes=[], NFT=False, amount=2, metadata='https://kepithorstudios.com/itemdata?token_index=5040000000000174000000000000000000000000000000000'}
+WalletItemImpl{ name='Bone Squire 1', tokenId='5040000000000229', tokenIndexes=[], NFT=False, amount=1, metadata='https://kepithorstudios.com/itemdata?token_index=5040000000000229000000000000000000000000000000000'}
+WalletItemImpl{ name='Dead Eye 1', tokenId='504000000000025b', tokenIndexes=[], NFT=False, amount=1, metadata='https://kepithorstudios.com/itemdata?token_index=504000000000025b000000000000000000000000000000000'}
+WalletItemImpl{ name='Cruel Bonelord 1', tokenId='50400000000002a1', tokenIndexes=[], NFT=False, amount=1, metadata='https://kepithorstudios.com/itemdata?token_index=50400000000002a1000000000000000000000000000000000'}
+WalletItemImpl{ name='Iron Sword', tokenId='4000000000000533', tokenIndexes=[], NFT=False, amount=2, metadata='https://cdn.enjin.io/mint/meta/4000000000000533.json'}
+WalletItemImpl{ name='Wooden Sword', tokenId='4000000000000540', tokenIndexes=[], NFT=False, amount=8, metadata='https://cdn.enjin.io/mint/meta/4000000000000540.json'}
+WalletItemImpl{ name='Iron Armor', tokenId='4000000000000537', tokenIndexes=[], NFT=False, amount=4, metadata='https://cdn.enjin.io/mint/meta/4000000000000537.json'}
+WalletItemImpl{ name='Wooden Shield', tokenId='400000000000053e', tokenIndexes=[], NFT=False, amount=6, metadata='https://cdn.enjin.io/mint/meta/400000000000053e.json'}
+WalletItemImpl{ name='YellowBalloon', tokenId='700000000000031d', tokenIndexes=[], NFT=False, amount=1, metadata='http://bitcoin-hodler.net/multiverse/?token_id=700000000000031d000000000000000000000000000000000'}
+WalletItemImpl{ name='Skeleton Warlock 01', tokenId='5000000000000644', tokenIndexes=[], NFT=False, amount=2, metadata='https://kepithorstudios.com/itemdata?token_index=5000000000000644000000000000000000000000000000000'}
+WalletItemImpl{ name='Golden Pants', tokenId='4000000000000530', tokenIndexes=[], NFT=False, amount=1, metadata='https://cdn.enjin.io/mint/meta/4000000000000530.json'}
+WalletItemImpl{ name='Compass', tokenId='4000000000000643', tokenIndexes=[], NFT=False, amount=3, metadata='https://cdn.enjin.io/mint/meta/4000000000000643.json'}
+WalletItemImpl{ name='FIO Express', tokenId='700000000000041a', tokenIndexes=[], NFT=False, amount=1, metadata='https://cdn.enjin.io/mint/meta/700000000000041a.json'}
+WalletItemImpl{ name='Iron Pants', tokenId='400000000000053b', tokenIndexes=[], NFT=False, amount=1, metadata='https://cdn.enjin.io/mint/meta/400000000000053b.json'}
+WalletItemImpl{ name='Golden Sword', tokenId='4000000000000529', tokenIndexes=[], NFT=False, amount=1, metadata='https://cdn.enjin.io/mint/meta/4000000000000529.json'}
+WalletItemImpl{ name='Crafty Puppy', tokenId='10000000000006aa', tokenIndexes=[], NFT=False, amount=3, metadata='https://forgottenartifacts.io/item-metadata/10000000000006aa000000000000000000000000000000000'}
+WalletItemImpl{ name='Iron Boots', tokenId='400000000000053d', tokenIndexes=[], NFT=False, amount=1, metadata='https://cdn.enjin.io/mint/meta/400000000000053d.json'}
+WalletItemImpl{ name='Plasma Blaster Bullet', tokenId='180000000000042b', tokenIndexes=[], NFT=False, amount=1, metadata='https://alterverse.sfo2.digitaloceanspaces.com/bullet.json'}
+WalletItemImpl{ name='Varag Shaman EnjinCraft', tokenId='58000000000006b4', tokenIndexes=[], NFT=False, amount=1, metadata='https://spiritclashcards.s3-us-west-1.amazonaws.com/Promo-Hidden/json/Varag+Shaman+(Enjincraft).json'}
+WalletItemImpl{ name='Aquaplane', tokenId='70800000000008f4', tokenIndexes=[0000000000000012], NFT=True, amount=1, metadata='https://cloud.enjin.io/platform/328/assets/{id}.json'}
+WalletItemImpl{ name='Arrow', tokenId='70800000000008f5', tokenIndexes=[0000000000000012], NFT=True, amount=1, metadata='https://cloud.enjin.io/platform/328/assets/{id}.json'}
+WalletItemImpl{ name='Ghostly Scepter H0 M0 S31 I7 D0 F0 E0 X0 A7 EF0 EW0 EA0 EL0 EE0 CNLoot Item', tokenId='18000000000018b8', tokenIndexes=[], NFT=False, amount=1, metadata='https://blockpegnio.net/tsd/json/Mainet/Realtime/GhostlyScepter-18000000000018b8.json'}
+WalletItemImpl{ name='Legendary Matter Lv1', tokenId='10000000000009db', tokenIndexes=[], NFT=False, amount=8, metadata='http://95.217.56.158/tsd/json/Mainet/Normal/Materials/LegendaryMatterLv1.json'}
+=========================================
+WalletItemImpl{ name='', tokenId='7080000000000544', tokenIndexes=[00000000000000d7,000000000000010d], NFT=True, amount=2, metadata=''}
+WalletItemImpl{ name='', tokenId='708000000000052a', tokenIndexes=[0000000000000203,00000000000002f3,0000000000000229], NFT=True, amount=3, metadata=''}
+WalletItemImpl{ name='', tokenId='7080000000000569', tokenIndexes=[000000000000026b,0000000000000265,00000000000002b8], NFT=True, amount=3, metadata=''}
+WalletItemImpl{ name='', tokenId='7080000000000537', tokenIndexes=[000000000000007b,000000000000007d], NFT=True, amount=2, metadata=''}
+WalletItemImpl{ name='', tokenId='7000000000001981', tokenIndexes=[], NFT=False, amount=1, metadata=''}
+WalletItemImpl{ name='', tokenId='708000000000052b', tokenIndexes=[00000000000002e2,00000000000002b6], NFT=True, amount=2, metadata=''}
+WalletItemImpl{ name='', tokenId='4000000000000529', tokenIndexes=[], NFT=False, amount=1, metadata=''}
+WalletItemImpl{ name='', tokenId='5080000000000027', tokenIndexes=[000000000000444d,0000000000004444], NFT=True, amount=2, metadata=''}
+WalletItemImpl{ name='', tokenId='4000000000000536', tokenIndexes=[], NFT=False, amount=3, metadata=''}
+WalletItemImpl{ name='', tokenId='4000000000000533', tokenIndexes=[], NFT=False, amount=2, metadata=''}
+WalletItemImpl{ name='', tokenId='4000000000000521', tokenIndexes=[], NFT=False, amount=1, metadata=''}
+WalletItemImpl{ name='', tokenId='400000000000052a', tokenIndexes=[], NFT=False, amount=2, metadata=''}
+WalletItemImpl{ name='', tokenId='4000000000000535', tokenIndexes=[], NFT=False, amount=3, metadata=''}
+33

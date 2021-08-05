@@ -2,6 +2,7 @@
 using MyMetaverse_SDK.Requests.Routes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,11 +24,11 @@ namespace MyMetaverse_SDK.Requests.Token
         }
         public async Task<bool> Create()
         {
-            var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.GEN_TOKEN), client_id, client_secret);
+            var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.GEN_TOKEN),  dynamicParams: new[] { client_id, client_secret });
 
             if (response.IsSuccessful) {
                 Token = response.Data;
-                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expiresIn;
+                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expires_in;
                 return true;
             }
             else
@@ -36,12 +37,12 @@ namespace MyMetaverse_SDK.Requests.Token
 
         public async Task<bool> RefreshToken()
         {
-            var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.REFRESH_TOKEN), parameters: new[] { Token.refreshToken });
+            var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.REFRESH_TOKEN), dynamicParams: new[] { Token.refresh_token });
 
             if (response.IsSuccessful)
             {
                 Token = response.Data;
-                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expiresIn;
+                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expires_in;
                 return true;
             }
             else
@@ -53,11 +54,11 @@ namespace MyMetaverse_SDK.Requests.Token
             if (ShouldUpdateToken())
                 await RefreshToken();
 
-            return Token.accessToken;
+            return Token.access_token;
         }
         private bool ShouldUpdateToken()
         {
-            return DateTimeOffset.Now.ToUnixTimeMilliseconds() - tokenExpireTime <= 0;
+            return DateTimeOffset.Now.ToUnixTimeMilliseconds() > tokenExpireTime;
         }
     }
 }

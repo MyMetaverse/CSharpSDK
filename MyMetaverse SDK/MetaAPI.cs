@@ -1,5 +1,6 @@
 ﻿using MyMetaverse_SDK.Meta.Entites;
 using MyMetaverse_SDK.Requests;
+using MyMetaverse_SDK.Requests.Actions;
 using MyMetaverse_SDK.Requests.Models.Entities;
 using MyMetaverse_SDK.Requests.Models.Responses;
 using MyMetaverse_SDK.Requests.Routes;
@@ -35,7 +36,7 @@ namespace MyMetaverse_SDK
 
         public GameEntity BuildPlayer(string playerID)
         {
-            return new GameEntityImpl();
+            return new GameEntityImpl(metaConnector, playerID);
         }
     }
 }
