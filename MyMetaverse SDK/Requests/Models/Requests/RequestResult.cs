@@ -23,7 +23,12 @@ namespace MyMetaverse_SDK.Requests.Models.Requests
 
         public Exception Exception()
         {
-            return new Exception(Error.error, new Exception(Error.error_description));
+            if (!string.IsNullOrEmpty(Error.message))
+                return new ApplicationException(Error.message);
+            else if (!string.IsNullOrEmpty(Error.error) || !string.IsNullOrEmpty(Error.error_description))
+                return new ApplicationException(Error.error, new ApplicationException(Error.error_description));
+            else
+                return new ApplicationException("Unknown error occurred!");
         }
     }
 }

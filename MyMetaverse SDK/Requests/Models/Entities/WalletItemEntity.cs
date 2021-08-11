@@ -1,48 +1,49 @@
-﻿using MyMetaverse_SDK.Meta.Entites;
+﻿using MyMetaverse_SDK.Meta.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MyMetaverse_SDK.Requests.Models.Entities
 {
-    public class WalletItemEntity : WalletItem
+    public class WalletItemEntity : IWalletItem
     {
         [JsonProperty]
-        string name;
+        public string name;
         [JsonProperty]
-        string tokenId;
+        public string tokenId;
         [JsonProperty]
-        List<string> indices;
+        public IEnumerable<string> indices;
         [JsonProperty]
-        bool nft;
+        public bool nft;
         [JsonProperty]
-        int amount;
+        public int amount;
         [JsonProperty]
-        string itemuri;
+        public string itemuri;
 
-        override
-        public string ToString()
-        {
-            return "WalletItemImpl{" +
-                " name='" + name + '\'' +
-                ", tokenId='" + tokenId + '\'' +
-                ", tokenIndexes=[" + ((indices != null) ? string.Join(",",indices.ToArray()) : "") +"]"+
-                ", NFT=" + nft +
-                ", amount=" + amount +
-                ", metadata='" + itemuri + '\'' +
-                '}';
-        }
-        public int getAmount() => amount;
+        //override
+        //public string ToString()
+        //{
+        //    return "WalletItemImpl{" +
+        //        " name='" + name + '\'' +
+        //        ", tokenId='" + tokenId + '\'' +
+        //        ", tokenIndexes=[" + ((indices != null) ? string.Join(",",indices.ToArray()) : "") +"]"+
+        //        ", NFT=" + nft +
+        //        ", amount=" + amount +
+        //        ", metadata='" + itemuri + '\'' +
+        //        '}';
+        //}
+        public int GetAmount() => amount;
 
-        public string getMetadata() => itemuri;
+        public string GetMetadata() => itemuri;
 
-        public string getName() => name;
+        public string GetName() => name;
 
-        public string getTokenId() => tokenId;
+        public string GetTokenId() => tokenId;
 
-        public List<string> getTokenIndexes() => indices;
+        public IEnumerable<IItemIndex> GetTokenIndexes() => (indices != null) ? indices.Select(idx => new ItemIndexEntity(idx)) : Enumerable.Empty<IItemIndex>();
 
-        public bool isNFT() => nft;
+        public bool IsNFT() => nft;
     }
 }

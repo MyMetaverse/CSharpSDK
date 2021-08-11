@@ -27,8 +27,20 @@ namespace MyMetaverse_SDK.Requests
             routes.Add(Routes.Routes.GET_WALLET, new Route(RestSharp.Method.GET, "users/{0}/wallet"));
             routes.Add(Routes.Routes.GET_ETH_ADDRESS, new Route(RestSharp.Method.GET, "users/{0}/ethereum-address"));
 
-            routes.Add(Routes.Routes.CREATE_LINKING_LINK, new Route(RestSharp.Method.GET, "users/{0}/linking-link"));
+            routes.Add(Routes.Routes.GET_TRADEABLE_ITEMS, new Route(RestSharp.Method.GET, "users/{0}/wallet/transferable/{1}"));
+
+            routes.Add(Routes.Routes.CREATE_LINKING_LINK, new Route(RestSharp.Method.POST, "users/{0}/linking-link").AddJsonBodyObject("details"));
             routes.Add(Routes.Routes.GET_LINKING_LINK, new Route(RestSharp.Method.GET, "users/{0}/linking-link"));
+
+            routes.Add(
+                Routes.Routes.SEND_TRADE_REQUEST,
+                new Route(RestSharp.Method.POST, "users/{0}/transfers")
+                .AddJsonBodyObject("receiverId")
+                .AddJsonBodyObject("offeredItems")
+                .AddJsonBodyObject("askedItems")
+                );
+
+            routes.Add(Routes.Routes.UPDATE_TOKEN_DETAILS, new Route(RestSharp.Method.PUT, "/tokens/{0}"));
         }
     }
 }

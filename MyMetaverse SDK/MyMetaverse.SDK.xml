@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyMetaverse.SDK</name>
+    </assembly>
+    <members>
+        <member name="M:MyMetaverse_SDK.MetaAPI.#ctor(MyMetaverse_SDK.Requests.Token.OAuthToken)">
+            <summary>MetaAPI Constructor takes <typeparamref name="OAuthToken"/> 
+            as a parameter to handle authentication token
+            </summary>
+            <remarks> 
+            Call <typeparamref name="Build"/> method after initiating the constructor
+            </remarks>
+        </member>
+        <member name="M:MyMetaverse_SDK.MetaAPI.WithCustomRoutes(MyMetaverse_SDK.Requests.Routes.RouteAdapter)">
+            <summary>
+            Use this method to pass custom routing to the MetaAPI
+            </summary>
+            <param name="_routes">is a class inherites from RouteAdapter</param>
+        </member>
+        <member name="M:MyMetaverse_SDK.MetaAPI.Build">
+            <summary>Build MetaAPI instance</summary>
+        </member>
+        <member name="M:MyMetaverse_SDK.MetaAPI.BuildPlayer(System.String)">
+            <summary>Build a new instance of <typeparamref name="GameEntity"/></summary>
+            <returns><typeparamref name="GameEntity"/></returns>
+        </member>
+    </members>
+</doc>

@@ -13,7 +13,7 @@ namespace MyMetaverse_SDK.Requests
     public class MetaConnector : BaseConnector
     {
         private RouteAdapter routeAdapter;
-        public MetaConnector(OAuthToken tokenHandler,RouteAdapter routeAdapter) : base(routeAdapter.BaseUrl,tokenHandler)
+        public MetaConnector(ITokenHandler tokenHandler,RouteAdapter routeAdapter) : base(routeAdapter.BaseUrl,tokenHandler)
         {
             this.routeAdapter = routeAdapter;
         }

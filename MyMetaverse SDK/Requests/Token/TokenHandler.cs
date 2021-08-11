@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace MyMetaverse_SDK.Requests.Token
 {
-    public class TokenHandler : BaseConnector
+    public class TokenHandler : BaseConnector, ITokenHandler
     {
-        public TokenResponse Token { get; private set; }
+        const string BASE_URL = "https://devcloud.mymetaverse.io/";
 
+        private TokenResponse token;
         private long tokenExpireTime = 0;
         private string client_id;
         private string client_secret;
@@ -22,39 +23,43 @@ namespace MyMetaverse_SDK.Requests.Token
             this.client_id = client_id;
             this.routes = routes;
         }
-        public async Task<bool> Create()
+        public TokenHandler(string client_id, string client_secret) : base(BASE_URL)
+        {
+            this.client_secret = client_secret;
+            this.client_id = client_id;
+            this.routes = new RoutesHub("https://devcloud.mymetaverse.io/");
+        }
+        public async Task<bool> CreateToken()
         {
             var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.GEN_TOKEN),  dynamicParams: new[] { client_id, client_secret });
 
             if (response.IsSuccessful) {
-                Token = response.Data;
+                token = response.Data;
                 tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expires_in;
                 return true;
             }
             else
                 throw response.Exception();
         }
-
         public async Task<bool> RefreshToken()
         {
-            var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.REFRESH_TOKEN), dynamicParams: new[] { Token.refresh_token });
+            var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.REFRESH_TOKEN), dynamicParams: new[] { token.refresh_token });
 
             if (response.IsSuccessful)
             {
-                Token = response.Data;
+                token = response.Data;
                 tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expires_in;
                 return true;
             }
             else
                 throw response.Exception();
         }
-        
         public async Task<string> GetToken()
         {
             if (ShouldUpdateToken())
                 await RefreshToken();
 
-            return Token.access_token;
+            return token.access_token;
         }
         private bool ShouldUpdateToken()
         {

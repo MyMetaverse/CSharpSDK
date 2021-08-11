@@ -20,6 +20,11 @@ namespace MyMetaverse_SDK.Requests.Routes
         public bool GotDynamicParams { get; private set; }
         private List<string> dynamicParams;
         public List<string> DynamicParams { get => dynamicParams; }
+
+        public bool GotJsonBody { get; private set; }
+        private List<string> jsonBodyObjects;
+        public List<string> JsonBodyObjects { get => jsonBodyObjects; }
+
         public bool AuthRequired { get; private set; }
 
         public Route(Method method, string endPoint, bool authRequired = true)
@@ -45,6 +50,16 @@ namespace MyMetaverse_SDK.Requests.Routes
                 this.dynamicParams = new List<string>();
 
             this.dynamicParams.Add(param);
+            return this;
+        }
+
+        public Route AddJsonBodyObject(string key)
+        {
+            GotJsonBody = true;
+            if (this.jsonBodyObjects == null)
+                this.jsonBodyObjects = new List<string>();
+
+            this.jsonBodyObjects.Add(key);
             return this;
         }
     }

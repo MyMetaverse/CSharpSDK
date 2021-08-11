@@ -11,8 +11,8 @@ namespace MyMetaverse_SDK.Requests
     public class BaseConnector
     {
         private RestClient _client;
-        private OAuthToken tokenHandler;
-        public BaseConnector(string baseUrl, OAuthToken tokenHandler)
+        private ITokenHandler tokenHandler;
+        public BaseConnector(string baseUrl, ITokenHandler tokenHandler)
         {
             _client = new RestClient(baseUrl);
             _client.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36";
@@ -22,12 +22,12 @@ namespace MyMetaverse_SDK.Requests
         {
             _client = new RestClient(baseUrl);
         }
-        public async Task<RequestResult<T>> ProcessRequest<T>(Route route, string[] endpointParams = null, string[] dynamicParams = null)
+        public async Task<RequestResult<T>> ProcessRequest<T>(Route route, string[] endpointParams = null, string[] dynamicParams = null, object[] jsonBody = null, JsonObject jsonObject = null)
         {
             RestRequest request = new RestRequest((endpointParams != null) ? string.Format(route.Endpoint, endpointParams) : route.Endpoint, route.Method);
 
             if (route.AuthRequired)
-                request.AddHeader("Authorization", "Bearer " + await tokenHandler.GetTokenAsync());
+                request.AddHeader("Authorization", "Bearer " + await tokenHandler.GetToken());
 
             if (route.GotFixedParams)
             {
@@ -40,6 +40,18 @@ namespace MyMetaverse_SDK.Requests
                 for (int x = 0; x < dynamicParams.Length; x++)
                     request.AddParameter(route.DynamicParams[x], dynamicParams[x]);
             }
+
+            if (route.GotJsonBody && jsonBody != null)
+            {
+                var jObj = new JsonObject();
+                for (int x = 0; x < jsonBody.Length; x++)
+                {
+                    jObj.Add(route.JsonBodyObjects[x], jsonBody[x]);
+                }
+                request.AddJsonBody(jObj);
+            }
+            if (jsonObject != null)
+                request.AddJsonBody(jsonObject);
 
             var response = await _client.ExecuteAsync(request);
             if (response.IsSuccessful)

@@ -1,4 +1,4 @@
-﻿using MyMetaverse_SDK.Meta.Entites;
+﻿using MyMetaverse_SDK.Meta.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,15 +6,15 @@ using System.Text;
 
 namespace MyMetaverse_SDK.Requests.Models.Entities
 {
-    public class PlayerWalletEntity : PlayerWallet
+    public class PlayerWalletEntity : IPlayerWallet
     {
         [JsonProperty]
         private IEnumerable<WalletItemEntity> liveWallet;
         [JsonProperty]
         private IEnumerable<WalletItemEntity> enjinWallet;
 
-        public IEnumerable<WalletItem> getEnjinWallet() => liveWallet;
+        public IEnumerable<IWalletItem> GetEnjinWallet() => liveWallet;
 
-        public IEnumerable<WalletItem> getMyMetaverseWallet() => enjinWallet;
+        public IEnumerable<IWalletItem> GetMyMetaverseWallet() => enjinWallet;
     }
 }
