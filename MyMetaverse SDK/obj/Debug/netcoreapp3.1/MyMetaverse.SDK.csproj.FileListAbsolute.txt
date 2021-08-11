@@ -1,9 +1,0 @@
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\bin\Debug\netcoreapp3.1\MyMetaverse.SDK.deps.json
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\bin\Debug\netcoreapp3.1\MyMetaverse.SDK.dll
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\bin\Debug\netcoreapp3.1\MyMetaverse.SDK.pdb
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\obj\Debug\netcoreapp3.1\MyMetaverse.SDK.csprojAssemblyReference.cache
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\obj\Debug\netcoreapp3.1\MyMetaverse.SDK.AssemblyInfoInputs.cache
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\obj\Debug\netcoreapp3.1\MyMetaverse.SDK.AssemblyInfo.cs
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\obj\Debug\netcoreapp3.1\MyMetaverse.SDK.csproj.CoreCompileInputs.cache
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\obj\Debug\netcoreapp3.1\MyMetaverse.SDK.dll
-G:\MyMetaverse\C#\MyMetaverse SDK\MyMetaverse SDK\obj\Debug\netcoreapp3.1\MyMetaverse.SDK.pdb
