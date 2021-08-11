@@ -1,0 +1,7 @@
+
+.vs
+MetaAPI.Tests/bin/Debug
+MetaAPI.Tests/obj/Debug
+MyMetaverse SDK/obj/Debug
+MyMetaverse SDK/obj/project.nuget.cache
+MyMetaverse SDK/bin/Debug
