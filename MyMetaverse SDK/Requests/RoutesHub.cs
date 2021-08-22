@@ -41,6 +41,10 @@ namespace MyMetaverse_SDK.Requests
                 );
 
             routes.Add(Routes.Routes.UPDATE_TOKEN_DETAILS, new Route(RestSharp.Method.PUT, "/tokens/{0}"));
+
+            routes.Add(Routes.Routes.DEPOSIT, new Route(RestSharp.Method.POST, "/deposit/"));
+
+            routes.Add(Routes.Routes.UPDATE_TOKEN_ACHIEVEMENT, new Route(RestSharp.Method.PUT, "/tokens/{0}/indexes/{1}/properties/{2}"));
         }
     }
 }

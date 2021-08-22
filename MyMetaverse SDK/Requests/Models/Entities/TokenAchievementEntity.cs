@@ -11,8 +11,16 @@ namespace MyMetaverse_SDK.Requests.Models.Entities
         [JsonProperty]
         private string name;
         [JsonProperty]
-        private object value;
+        private props props;
+        public ITokenAchievement Build(string name,object value) { this.name = name; this.props = new props() { content = value, config = new TokenAchievementConfig()}; return this; }
+        public TokenAchievementConfig Config() => props.config;
         public string GetName() => name;
-        public object getValue() => value;
+        public object GetValue() => props.content;
+    }
+
+    internal class props
+    {
+        public object content { get; set; }
+        public TokenAchievementConfig config { get; set; }
     }
 }

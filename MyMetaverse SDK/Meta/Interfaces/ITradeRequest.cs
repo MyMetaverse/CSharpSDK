@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,5 +11,6 @@ namespace MyMetaverse_SDK.Meta.Interfaces
         string GetReceiverPlayerID();
         IEnumerable<IWalletItem> GetItemsToOffer();
         IEnumerable<IWalletItem> GetItemsToAsk();
+        JsonObject ToJson();
     }
 }

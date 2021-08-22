@@ -15,6 +15,8 @@ namespace MyMetaverse_SDK.Requests.Routes
         GET_LINKING_LINK,
         GET_TRADEABLE_ITEMS,
         SEND_TRADE_REQUEST,
-        UPDATE_TOKEN_DETAILS
+        UPDATE_TOKEN_DETAILS,
+        DEPOSIT,
+        UPDATE_TOKEN_ACHIEVEMENT
     }
 }

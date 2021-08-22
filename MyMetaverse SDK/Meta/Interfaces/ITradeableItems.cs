@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,5 +9,6 @@ namespace MyMetaverse_SDK.Meta.Interfaces
     {
         IEnumerable<IWalletItem> GetInitiatorItems();
         IEnumerable<IWalletItem> GetReceiverItems();
+        JsonObject Tojson();
     }
 }

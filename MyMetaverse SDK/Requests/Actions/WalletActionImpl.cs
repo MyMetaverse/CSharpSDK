@@ -1,5 +1,7 @@
-﻿using MyMetaverse_SDK.Meta.Interfaces;
+﻿using MyMetaverse_SDK.Extensions;
+using MyMetaverse_SDK.Meta.Interfaces;
 using MyMetaverse_SDK.Requests.Models.Entities;
+using MyMetaverse_SDK.Requests.Models.Requests;
 using MyMetaverse_SDK.Requests.Routes;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,9 @@ namespace MyMetaverse_SDK.Requests.Actions
 {
     public class WalletActionImpl
     {
-        public static async Task<PlayerWalletEntity> Execute(MetaConnector connector,string playerID)
+        public static async Task<IResult<IPlayerWallet>> Execute(MetaConnector connector, string playerID)
         {
-            var response = await connector.ProcessRequest<PlayerWalletEntity>(connector.FindRoute(Routes.Routes.GET_WALLET), endpointParams: new[] { playerID });
-            if (response.IsSuccessful)
-                return response.Data;
-            else
-                throw response.Exception();
+            return await connector.ProcessRequest<IPlayerWallet, PlayerWalletEntity>(connector.FindRoute(Routes.Routes.GET_WALLET), endpointParams: new[] { playerID });
         }
     }
 }

@@ -9,13 +9,6 @@ namespace MyMetaverse_SDK.Requests.Actions
 {
     public class GetTradeableItemsActionImpl
     {
-        public static async Task<ITradeableItems> Execute(MetaConnector connector, string initID,string recID)
-        {
-            var response = await connector.ProcessRequest<TradeableItemsEntity>(connector.FindRoute(Routes.Routes.GET_TRADEABLE_ITEMS), endpointParams: new[] { initID, recID });
-            if (response.IsSuccessful)
-                return response.Data;
-            else
-                throw response.Exception();
-        }
+        public static async Task<IResult<ITradeableItems>> Execute(MetaConnector connector, string initID,string recID) => await connector.ProcessRequest<ITradeableItems,TradeableItemsEntity>(connector.FindRoute(Routes.Routes.GET_TRADEABLE_ITEMS), endpointParams: new[] { initID, recID });
     }
 }

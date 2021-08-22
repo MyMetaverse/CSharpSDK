@@ -1,61 +1,168 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyMetaverse_SDK.Requests.Token;
 using System;
+using System.Collections.Generic;
+using MyMetaverse_SDK;
 using System.Linq;
+using MyMetaverse_SDK.Requests.Token;
+using MyMetaverse_SDK.Meta.Interfaces;
+using System.Threading.Tasks;
+using MyMetaverse_SDK.Meta.Models;
 
 namespace MetaAPI.Tests
 {
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public async System.Threading.Tasks.Task TestMethod1Async()
+        private MyMetaverse_SDK.MetaAPI MetaAPI;
+        private IGameEntity ricardo;
+        private IGameEntity simon;
+        private IGameEntity ahmed;
+        [TestInitialize]
+        public async Task InitAsync()
         {
-            //CustomRoutes routes = new CustomRoutes("https://cloud.mymetaverse.io/");
-            //CustomTokenHandler cth = new CustomTokenHandler("xflood.ow@gmail.com", "iisL0gin!",routes);
-            //await cth.CreateToken();
-            //var MetaAPI = new MyMetaverse_SDK.MetaAPI(th).Build();
-
+            //Building TokenHandler class using Client_id and Client_secret
             TokenHandler th = new TokenHandler("60a6be577a0ef3d457ba449f", "ZyOJhrdaFPznsHFhhwhLDVEWT0740Tjq");
             await th.CreateToken();
-            var MetaAPI = new MyMetaverse_SDK.MetaAPI(th).Build();
 
-            var ricardo = MetaAPI.BuildPlayer("ricardo");
-            var simon = MetaAPI.BuildPlayer("simon");
-            var ahmed = MetaAPI.BuildPlayer("ahmed");
+            //Buidling New MetaAPI instance using that TokenHandler we created
+            MetaAPI = new MyMetaverse_SDK.MetaAPI(th).Build();
 
-            var token = MetaAPI.BuildToken("60c6dae7f235842bd82d0759", "61031996b893bc2e34d92d4d");
-
-            token.UpdateDescription("testing changing description C# SDK");
-            token.UpdateName("C# Special Token");
-            //token.UpdateTokenImage("https://assets-global.website-files.com/5d56cb37dc00725ec86984e3/6000f0cf6f8a113d4a92f2a4_reg-p-500.png");
-
-            var newToken = await token.SaveChanges();
-           
-
-
-            //var ricAndSimonItems = await ricardo.GetTradeableItems(simon);
-
-            //await ricardo.SendTradeRequest(simon, ricAndSimonItems.GetInitiatorItems(), ricAndSimonItems.GetReceiverItems());
-
-            //var ricardo = MetaAPI.BuildPlayer("ricardo");
-            //var wallet = await player.FetchWallet();
-            //var recWallet = await ricardo.FetchWallet();
-            //await ricardo.GetTradeableItems(simon);
-            //await simon.GetTradeableItems(ricardo);
-            //await player.GetTradeableItems(ricardo);
-            //await player.GetTradeableItems(simon);
-            //await ahmed.CreateLinkingLink();
-
-
-
-            await ahmed.CreateLinkingLink(new MyMetaverse_SDK.Meta.Models.LinkingDetails("xflood", "https://cloud.mymetaverse.io/assets/image.png", "Hello there, This is Ahmed Abdelbary as xFlooD!"));
-            //await player.FetchEthAddress();
-            //await player.GetLinkingLink();
-            //await simon.GetLinkingLink();
-
-
-            Console.WriteLine();
+            //Building Players Entities
+            ricardo = MetaAPI.BuildPlayer("ricardo");
+            simon = MetaAPI.BuildPlayer("simon");
+            ahmed = MetaAPI.BuildPlayer("ahmed");
         }
+
+        [TestMethod]
+        public async Task FetchingWalletsAndEthAddresses()
+        {
+            //Fetching Players Wallets
+            var ricWalletReq = await ricardo.FetchWallet();
+            var simWalletReq = await simon.FetchWallet();
+
+            if (ricWalletReq.IsSuccessful())
+            {
+                var ricEthAddressRequest = await ricardo.FetchEthAddress();
+
+                Console.WriteLine("Ricardo Eth Address: " + (ricEthAddressRequest.IsSuccessful() ? ricEthAddressRequest.Data().GetAddress() : "Failed to retrive eth address"));
+                Console.WriteLine("Ricardo Enjin Wallet: ");
+                ricWalletReq.Data().GetEnjinWallet().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetName()); });
+                Console.WriteLine("Ricardo MyMetaverse Wallet:");
+                ricWalletReq.Data().GetMyMetaverseWallet().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetName()); });
+            }
+            else
+                Console.WriteLine(ricWalletReq.GetErrorMessage());
+
+            if (simWalletReq.IsSuccessful())
+            {
+                var simEthAddressReq = await simon.FetchEthAddress();
+
+                Console.WriteLine("Simon Eth Address: " + (simEthAddressReq.IsSuccessful() ? simEthAddressReq.Data().GetAddress() : "Failed to retrive eth address"));
+                Console.WriteLine("Simon Enjin Wallet:");
+                simWalletReq.Data().GetEnjinWallet().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetName()); });
+                Console.WriteLine("Simon MyMetaverse Wallet:");
+                simWalletReq.Data().GetMyMetaverseWallet().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetName()); });
+            }
+            else
+                Console.WriteLine(simWalletReq.GetErrorMessage());
+
+        }
+
+        [TestMethod]
+        public async Task GetTradableItemsAndSendTradeRequest()
+        {
+            //Getting Tradableitems for Two Players
+            var ricAndSimTradeableItemsRequest = await ricardo.GetTradeableItems(simon);
+            var simAndRicTradeableItemsRequest = await simon.GetTradeableItems(ricardo);
+
+
+            if (ricAndSimTradeableItemsRequest.IsSuccessful())
+            {
+                Console.WriteLine("Ricardo Items: ");
+                ricAndSimTradeableItemsRequest.Data().GetInitiatorItems().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetTokenId()); });
+                Console.WriteLine("Simon Items: ");
+                ricAndSimTradeableItemsRequest.Data().GetReceiverItems().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetTokenId()); });
+            }
+            else
+                throw ricAndSimTradeableItemsRequest.Exception();
+
+            if (simAndRicTradeableItemsRequest.IsSuccessful())
+            {
+                Console.WriteLine("Simon Items: ");
+                simAndRicTradeableItemsRequest.Data().GetInitiatorItems().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetTokenId()); });
+                Console.WriteLine("Ricardo Items: ");
+                simAndRicTradeableItemsRequest.Data().GetReceiverItems().ToList().ForEach(item => { Console.WriteLine("\t" + item.GetTokenId()); });
+            }
+            else
+                throw simAndRicTradeableItemsRequest.Exception();
+
+            //Sending Trade requests
+            var ricTradeRequest = await ricardo.SendTradeRequest(simon, ricAndSimTradeableItemsRequest.Data().GetInitiatorItems());
+            var simTradeRequest = await simon.SendTradeRequest(ricardo, simAndRicTradeableItemsRequest.Data().GetInitiatorItems(), simAndRicTradeableItemsRequest.Data().GetReceiverItems());
+
+            if (ricTradeRequest.IsSuccessful())
+                Console.WriteLine("Ricardo Trade request Init ID: " + ricTradeRequest.Data().GetID());
+            else
+                throw ricTradeRequest.Exception();
+
+            if (simTradeRequest.IsSuccessful())
+                Console.WriteLine("Simon Trade request Rec ID: " + simTradeRequest.Data().GetStatus());
+            else
+                throw simTradeRequest.Exception();
+        }
+
+        [TestMethod]
+        public async Task CreateLinkingLink()
+        {
+            //Creating new linking process, Method takes one parameter of type LinkingDetails that takes Username, ImageUrl and Description as a constructor parameters
+            var ricLinkingResult = await ricardo.CreateLinkingLink(new LinkingDetails("Ricardo", "This should be Image URL", "Ricardo Linking process description"));
+            var simLinkingResult = await simon.CreateLinkingLink(new LinkingDetails("Simon", "This should be Image URL", "Simon Linking process description"));
+            var ahLinkingResult = await ahmed.CreateLinkingLink(new LinkingDetails("Ahmed", "This should be Image URL", "Ahmed Linking process description"));
+
+            if (ricLinkingResult.IsSuccessful())
+                Console.WriteLine("Ricardo linking id: " + ricLinkingResult.Data().GetLinkId());
+            else
+                Console.WriteLine(ricLinkingResult.GetErrorMessage());
+
+            if (simLinkingResult.IsSuccessful())
+                Console.WriteLine("Simon linking id: " + simLinkingResult.Data().GetLinkId());
+            else
+                Console.WriteLine(simLinkingResult.GetErrorMessage());
+
+            if (ahLinkingResult.IsSuccessful())
+                Console.WriteLine("Ahmed linking id: " + ahLinkingResult.Data().GetLinkId());
+            else
+                Console.WriteLine(ahLinkingResult.GetErrorMessage());
+        }
+
+        [TestMethod]
+        public async Task GetLinkingLink()
+        {
+            //Getting the most recent Linking process information
+            var ricLinkingLink = await ricardo.GetLinkingLink();
+            var simLinkingLink = await simon.GetLinkingLink();
+            var ahLinkingLink = await ahmed.GetLinkingLink();
+
+
+            if (ricLinkingLink.IsSuccessful())
+                Console.WriteLine("Ricardo linking id: " + ricLinkingLink.Data().GetLinkId());
+            else
+                Console.WriteLine(ricLinkingLink.GetErrorMessage());
+
+            if (simLinkingLink.IsSuccessful())
+                Console.WriteLine("Simon linking id: " + simLinkingLink.Data().GetLinkId());
+            else
+                Console.WriteLine(simLinkingLink.GetErrorMessage());
+
+            if (ahLinkingLink.IsSuccessful())
+                Console.WriteLine("Ahmed linking id: " + ahLinkingLink.Data().GetLinkId());
+            else
+                Console.WriteLine(ahLinkingLink.GetErrorMessage());
+        }
+
+
+        
+
+
     }
 }

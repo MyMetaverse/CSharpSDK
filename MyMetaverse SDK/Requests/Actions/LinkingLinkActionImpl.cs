@@ -11,21 +11,7 @@ namespace MyMetaverse_SDK.Requests.Actions
 {
     public class LinkingLinkActionImpl
     {
-       public static async Task<LinkingLinkEntity> GetLinkingLink(MetaConnector connector, string playerID)
-        {
-            var response = await connector.ProcessRequest<LinkingLinkEntity>(connector.FindRoute(Routes.Routes.GET_LINKING_LINK), endpointParams: new[] { playerID });
-            if (response.IsSuccessful)
-                return response.Data;
-            else
-                throw response.Exception();
-        }
-        public static async Task<LinkingLinkEntity> CreateLinkingLink(MetaConnector connector, string playerID, LinkingDetails details)
-        {
-            var response = await connector.ProcessRequest<LinkingLinkEntity>(connector.FindRoute(Routes.Routes.CREATE_LINKING_LINK), endpointParams: new[] { playerID }, jsonBody: new[] { details });
-            if (response.IsSuccessful)
-                return response.Data;
-            else
-                throw response.Exception();
-        }
+        public static async Task<IResult<ILinkingLink>> GetLinkingLink(MetaConnector connector, string playerID) => await connector.ProcessRequest<ILinkingLink,LinkingLinkEntity>(connector.FindRoute(Routes.Routes.GET_LINKING_LINK), endpointParams: new[] { playerID });
+        public static async Task<IResult<ILinkingLink>> CreateLinkingLink(MetaConnector connector, string playerID, LinkingDetails details) => await connector.ProcessRequest<ILinkingLink,LinkingLinkEntity>(connector.FindRoute(Routes.Routes.CREATE_LINKING_LINK), endpointParams: new[] { playerID }, jsonBody: new[] { details });
     }
 }

@@ -27,15 +27,15 @@ namespace MyMetaverse_SDK.Requests.Token
         {
             this.client_secret = client_secret;
             this.client_id = client_id;
-            this.routes = new RoutesHub("https://devcloud.mymetaverse.io/");
+            this.routes = new RoutesHub(BASE_URL);
         }
         public async Task<bool> CreateToken()
         {
             var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.GEN_TOKEN),  dynamicParams: new[] { client_id, client_secret });
 
-            if (response.IsSuccessful) {
-                token = response.Data;
-                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expires_in;
+            if (response.IsSuccessful()) {
+                token = response.Data();
+                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data().expires_in;
                 return true;
             }
             else
@@ -45,10 +45,10 @@ namespace MyMetaverse_SDK.Requests.Token
         {
             var response = await ProcessRequest<TokenResponse>(routes.GetRoute(Routes.Routes.REFRESH_TOKEN), dynamicParams: new[] { token.refresh_token });
 
-            if (response.IsSuccessful)
+            if (response.IsSuccessful())
             {
-                token = response.Data;
-                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data.expires_in;
+                token = response.Data();
+                tokenExpireTime = DateTimeOffset.Now.ToUnixTimeMilliseconds() + response.Data().expires_in;
                 return true;
             }
             else

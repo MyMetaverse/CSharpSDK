@@ -27,6 +27,7 @@ namespace MyMetaverse_SDK
         public MetaAPI(ITokenHandler tokenHandler)
         {
             RoutesHub _routes = new RoutesHub("https://devcloud.mymetaverse.io/adopters");
+            //RoutesHub _routes = new RoutesHub("http://localhost:8080/");
             routes = _routes;
             this.tokenHandler = tokenHandler;
         }
@@ -54,9 +55,9 @@ namespace MyMetaverse_SDK
         {
             return new GameEntityImpl(metaConnector, playerID);
         }
-        public IToken BuildToken(string id,string index = null)
+        public ITokenMetadata BuildToken(string id,string index = null)
         {
-            return new TokenEntity(metaConnector,id, index);
+            return new TokenMetadataEntity(metaConnector,id, index);
         }
     }
 }

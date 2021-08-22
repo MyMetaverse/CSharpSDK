@@ -1,5 +1,6 @@
 ﻿using MyMetaverse_SDK.Meta.Interfaces;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,33 +11,27 @@ namespace MyMetaverse_SDK.Requests.Models.Entities
     public class WalletItemEntity : IWalletItem
     {
         [JsonProperty]
-        public string name;
+        private string name;
         [JsonProperty]
-        public string tokenId;
+        private string tokenId;
         [JsonProperty]
-        public IEnumerable<string> indices;
+        private IEnumerable<string> indices;
         [JsonProperty]
-        public bool nft;
+        private bool nft;
         [JsonProperty]
-        public int amount;
+        private int amount;
         [JsonProperty]
-        public string itemuri;
+        private string itemURI;
+        //public string name { get; set; }
+        //public string tokenId { get; set; }
+        //public IEnumerable<string> indices { get; set; }
+        //public bool nft { get; set; }
+        //public int amount { get; set; }
+        //public string itemURI { get; set; }
 
-        //override
-        //public string ToString()
-        //{
-        //    return "WalletItemImpl{" +
-        //        " name='" + name + '\'' +
-        //        ", tokenId='" + tokenId + '\'' +
-        //        ", tokenIndexes=[" + ((indices != null) ? string.Join(",",indices.ToArray()) : "") +"]"+
-        //        ", NFT=" + nft +
-        //        ", amount=" + amount +
-        //        ", metadata='" + itemuri + '\'' +
-        //        '}';
-        //}
         public int GetAmount() => amount;
 
-        public string GetMetadata() => itemuri;
+        public string GetMetadata() => itemURI;
 
         public string GetName() => name;
 
@@ -45,5 +40,19 @@ namespace MyMetaverse_SDK.Requests.Models.Entities
         public IEnumerable<IItemIndex> GetTokenIndexes() => (indices != null) ? indices.Select(idx => new ItemIndexEntity(idx)) : Enumerable.Empty<IItemIndex>();
 
         public bool IsNFT() => nft;
+
+        public JsonObject ToJson()
+        {
+            var mainObj = new JsonObject();
+
+            mainObj.Add("name", name);
+            mainObj.Add("tokenId", tokenId);
+            mainObj.Add("indices", indices);
+            mainObj.Add("nft", nft);
+            mainObj.Add("amount", amount);
+            mainObj.Add("itemURI", itemURI);
+
+            return mainObj;
+        }
     }
 }

@@ -6,13 +6,13 @@ using System.Text;
 
 namespace MyMetaverse_SDK.Requests.Models.Entities
 {
-    public class LinkingLinkEntity : ILinkingLink
+    public class TradeRequestResultEntity : ITradeRequestResult
     {
         [JsonProperty]
-        private string linkingLink;
+        private string id;
         [JsonProperty]
-        private string linkId;
-        public string GetLinkId() => linkId;
-        public string GetLinkingLink() => linkingLink;
+        private string status;
+        public string GetID() => id;
+        public string GetStatus() => status;
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +14,6 @@ namespace MyMetaverse_SDK.Meta.Interfaces
         IEnumerable<IItemIndex> GetTokenIndexes();
         int GetAmount();
         string GetMetadata();
+        JsonObject ToJson();
     }
 }
