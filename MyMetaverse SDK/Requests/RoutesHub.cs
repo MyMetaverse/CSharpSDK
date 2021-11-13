@@ -40,11 +40,16 @@ namespace MyMetaverse_SDK.Requests
                 .AddJsonBodyObject("askedItems")
                 );
 
+            routes.Add(Routes.Routes.GET_TOKEN_METADATA, new Route(RestSharp.Method.GET, "/tokens/{0}"));
+            routes.Add(Routes.Routes.GET_TOKEN_INDEX_METADATA, new Route(RestSharp.Method.GET, "/tokens/{0}/{1}"));
+
             routes.Add(Routes.Routes.UPDATE_TOKEN_DETAILS, new Route(RestSharp.Method.PUT, "/tokens/{0}"));
 
             routes.Add(Routes.Routes.DEPOSIT, new Route(RestSharp.Method.POST, "/deposit/"));
 
-            routes.Add(Routes.Routes.UPDATE_TOKEN_ACHIEVEMENT, new Route(RestSharp.Method.PUT, "/tokens/{0}/indexes/{1}/properties/{2}"));
+            routes.Add(Routes.Routes.UPDATE_INDEX_PROPERTY, new Route(RestSharp.Method.PUT, "/tokens/{0}/indexes/{1}/properties/{2}"));
+
+            routes.Add(Routes.Routes.UPDATE_TOKEN_PROPERTY_SCHEMA, new Route(RestSharp.Method.PUT, "/tokens/{0}/properties"));
         }
     }
 }

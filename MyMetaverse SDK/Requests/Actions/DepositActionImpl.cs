@@ -24,8 +24,8 @@ namespace MyMetaverse_SDK.Requests.Actions
             foreach(var token in tokens)
             {
                 JsonObject tokenObject = new JsonObject();
-                tokenObject.Add("token_id", token.GetID());
-                tokenObject.Add("token_index", token.GetIndex());
+                tokenObject.Add("token_id", token.GetTokenID());
+                tokenObject.Add("token_index", token.GetTokenIndex());
                 tokenObject.Add("value", token.GetAmount().ToString());
                 objects.Add(tokenObject);
             }

@@ -7,6 +7,7 @@ using MyMetaverse_SDK.Requests.Token;
 using MyMetaverse_SDK.Meta.Interfaces;
 using System.Threading.Tasks;
 using MyMetaverse_SDK.Meta.Models;
+using System.Threading;
 
 namespace MetaAPI.Tests
 {
@@ -165,19 +166,20 @@ namespace MetaAPI.Tests
         public async Task TokenManipulating()
         {
             //Building Tokens instances
-            var token = MetaAPI.BuildToken("60c6dae7f235842bd82d0759", "1");
-            var token1 = MetaAPI.BuildToken("60c6dae7f235842bd82d0759", "2");
-            var token2 = MetaAPI.BuildToken("6103116f71bde41c7c7d919a", "New NFT Index");
-            var token3 = MetaAPI.BuildToken("60c6dae7f235842bd82d0759", "61031996b893bc2e34d92d4d");
-            var tokens = new List<ITokenMetadata>() { token, token1, token2, token3 };
+            var token = await MetaAPI.BuildToken("10", "1");
+            var token1 = await MetaAPI.BuildToken("10", "Another New Index");
+            var token2 = await MetaAPI.BuildToken("10");
+            //var token3 = MetaAPI.BuildToken("60c6dae7f235842bd82d0759", "61031996b893bc2e34d92d4d");
+            //var tokens = new List<ITokenMetadata>() { token, token1, token2, token3 };
 
-            //var res = await token.CreateTokenEditor().UpdateName("NFT Token Manipulating").UpdateDescription("Token Description Test").SaveChanges();
 
             //if (!res.IsSuccessful())
             //    Console.WriteLine(res.GetErrorMessage());
 
 
-            var res2 = await token2.CreateTokenAchievementEditor().UpdateTokenAchievements("NFT", "String Value").SaveChanges();
+            //var res = await token.CreateTokenEditor().UpdateName("NFT Token Manipulating").UpdateDescription("Token Description Test").SaveChanges();
+            //var res1 = await token.CreateTokenAchievementEditor().UpdateTokenAchievement("NFT 2", "String Value", true).SaveChanges();
+            //var res2 = await token.CreateTokenAchievementEditor().UpdateIndexAchievement("Rarity", 77877).SaveChanges();
 
             //var depo = await ricardo.Deposit(tokens);
 

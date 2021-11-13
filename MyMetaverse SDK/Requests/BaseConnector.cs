@@ -108,11 +108,10 @@ namespace MyMetaverse_SDK.Requests
             }
             if (jsonObject != null)
                 request.AddJsonBody(jsonObject);
-
-            var response = await _client.ExecuteAsync<T>(request);
+            var response = await _client.ExecuteAsync(request);
             if (response.IsSuccessful)
             {
-                return new Result<T>(response.Data, response.IsSuccessful, null);
+                return new Result<T>(JsonConvert.DeserializeObject<T>(response.Content), response.IsSuccessful, null);
             }
             else
             {
@@ -120,16 +119,16 @@ namespace MyMetaverse_SDK.Requests
                 {
                     try
                     {
-                        return new Result<T>(response.Data, response.IsSuccessful, new RequestError());//JsonConvert.DeserializeObject<RequestError>(response.Content)
+                        return new Result<T>(JsonConvert.DeserializeObject<T>(response.Content), response.IsSuccessful, new RequestError());//JsonConvert.DeserializeObject<RequestError>(response.Content)
                     }
                     catch (Exception)
                     {
-                        return new Result<T>(response.Data, response.IsSuccessful, new RequestError() { error = response.Content });
+                        return new Result<T>(JsonConvert.DeserializeObject<T>(response.Content), response.IsSuccessful, new RequestError() { error = response.Content });
                     }
                 }
                 else
                 {
-                    return new Result<T>(response.Data, response.IsSuccessful, new RequestError() { error = response.StatusCode.ToString() + " " + response.StatusDescription });
+                    return new Result<T>(JsonConvert.DeserializeObject<T>(response.Content), response.IsSuccessful, new RequestError() { error = response.StatusCode.ToString() + " " + response.StatusDescription });
                 }
             }
         }

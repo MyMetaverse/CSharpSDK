@@ -23,9 +23,9 @@ namespace MetaAPI.Tests
         public async Task<bool> CreateToken()
         {
             var response = await ProcessRequest<AuthToken>(routing.GetRoute(Routes.GEN_TOKEN), dynamicParams: new[] { email, password });
-            if (response.IsSuccessful)
+            if (response.IsSuccessful())
             {
-                token = response.Data;
+                token = response.Data();
                 return true;
             }
             else
@@ -37,9 +37,9 @@ namespace MetaAPI.Tests
         public async Task<bool> RefreshToken()
         {
             var response = await ProcessRequest<AuthToken>(routing.GetRoute(Routes.GEN_TOKEN), dynamicParams: new[] { email, password });
-            if (response.IsSuccessful)
+            if (response.IsSuccessful())
             {
-                token = response.Data;
+                token = response.Data();
                 return true;
             }
             else

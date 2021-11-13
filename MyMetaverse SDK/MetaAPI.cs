@@ -55,9 +55,10 @@ namespace MyMetaverse_SDK
         {
             return new GameEntityImpl(metaConnector, playerID);
         }
-        public ITokenMetadata BuildToken(string id,string index = null)
+        public async Task<ITokenMetadata> BuildToken(string id,string index = null)
         {
-            return new TokenMetadataEntity(metaConnector,id, index);
+            //return await TokenMetadataEntity.Create(metaConnector,id, index);
+            return null;
         }
     }
 }

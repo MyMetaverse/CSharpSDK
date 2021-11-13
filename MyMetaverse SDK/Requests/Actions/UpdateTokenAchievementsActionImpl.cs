@@ -16,38 +16,66 @@ namespace MyMetaverse_SDK.Requests.Actions
         private string tokenID;
         private string tokenIndex;
 
-        private List<ITokenAchievement> achievements;
+        private Dictionary<string, TokenPropertyEntity> achievements;
+        private Dictionary<string, TokenPropertyEntity> indexAchievements;
         public UpdateTokenAchievementsActionImpl(MetaConnector connector, string tokenID,string tokenIndex)
         {
             this.connector = connector;
             this.tokenID = tokenID;
             this.tokenIndex = tokenIndex;
-            achievements = new List<ITokenAchievement>();
+            achievements = new Dictionary<string, TokenPropertyEntity>();
+            indexAchievements = new Dictionary<string, TokenPropertyEntity>();
         }
 
-        public async Task<IResult<ITokenMetadata>> SaveChanges()
-        {
+        //public async Task<IResult<ITokenMetadata>> SaveChanges()
+        //{
+        //    IResult<ITokenMetadata> result = null;
+        //    foreach (var ach in achievements)
+        //    {
+        //        var bodyObj = new JsonObject();
+        //        bodyObj.Add("tokenId", tokenID);
+        //        //bodyObj.Add("tokenIndex", tokenIndex);
+        //        //bodyObj.Add("propertyName", ach.GetName());
+        //        var contObj = new JsonObject();
+        //        contObj.Add(ach.Key, ach.Value.props);
+        //        bodyObj.Add("content", contObj.ToString());
+        //        bodyObj.Add("hiddenProperty", ach.Value.HiddenProp);
+        //        result = await connector.ProcessRequest<ITokenMetadata,TokenMetadataEntity>(connector.FindRoute(Routes.Routes.UPDATE_TOKEN_PROPERTY_SCHEMA), endpointParams: new[] { tokenID }, jsonObject: bodyObj);
+        //    }
+        //    achievements.Clear();
 
-            IResult<ITokenMetadata> result = null;
-            foreach (var ach in achievements)
-            {
-                var bodyObj = new JsonObject();
-                bodyObj.Add("tokenId", tokenID);
-                bodyObj.Add("tokenIndex", tokenIndex);
-                bodyObj.Add("propertyName", ach.GetName());
-                bodyObj.Add("content", ach.GetValue());
-                bodyObj.Add("hiddenProperty", false);
-                result = await connector.ProcessRequest<ITokenMetadata,TokenMetadataEntity>(connector.FindRoute(Routes.Routes.UPDATE_TOKEN_ACHIEVEMENT), endpointParams: new[] { tokenID, tokenIndex, ach.GetName() }, jsonObject: bodyObj);
-            }
-            return result;
-        }
+        //    foreach(var iach in indexAchievements)
+        //    {
+        //        var bodyObj = new JsonObject();
+        //        bodyObj.Add("tokenId", tokenID);
+        //        bodyObj.Add("tokenIndex", tokenIndex);
+        //        bodyObj.Add("propertyName", iach.Key);
+        //        bodyObj.Add("content", iach.Value.props.content);
+        //        bodyObj.Add("hiddenProperty", iach.Value.HiddenProp);
 
-        public IUpdateTokenAchievementsAction UpdateTokenAchievements(ITokenAchievement tokenAchievement)
-        {
-            achievements.Add(tokenAchievement);
-            return this;
-        }
+        //        result = await connector.ProcessRequest<ITokenMetadata, TokenMetadataEntity>(connector.FindRoute(Routes.Routes.UPDATE_INDEX_PROPERTY), endpointParams: new[] { tokenID, tokenIndex, iach.Key }, jsonObject: bodyObj);
+        //    }
+        //    indexAchievements.Clear();
+        //    return result;
+        //}
 
-        public IUpdateTokenAchievementsAction UpdateTokenAchievements(string name, object value)  => UpdateTokenAchievements(new TokenAchievementEntity().Build(name, value));
+        //public IUpdateTokenAchievementsAction UpdateIndexAchievement(string achName, object value, bool hidden = false)
+        //{
+        //    if (!indexAchievements.ContainsKey(achName))
+        //        indexAchievements.Add(achName, new TokenAchievementEntity(new AchievementProps(value), hidden));
+        //    else
+        //        indexAchievements[achName] = new TokenAchievementEntity(new AchievementProps(value), hidden);
+        //    return this;
+        //}
+        //public IUpdateTokenAchievementsAction UpdateTokenAchievement(string name, object value, bool hidden = false, AchievementConfig config = null)
+        //{
+        //    if (!achievements.ContainsKey(name))
+        //        achievements.Add(name,  new TokenAchievementEntity(new AchievementProps(value, config),hidden));
+        //    else
+        //        achievements[name] = new TokenAchievementEntity(new AchievementProps(value, config), hidden);
+
+        //    return this;
+        //    //UpdateTokenAchievements(new TokenAchievementEntity().Build(name, value));
+        //}
     }
 }

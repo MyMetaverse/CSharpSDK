@@ -22,12 +22,6 @@ namespace MyMetaverse_SDK.Requests.Models.Entities
         private int amount;
         [JsonProperty]
         private string itemURI;
-        //public string name { get; set; }
-        //public string tokenId { get; set; }
-        //public IEnumerable<string> indices { get; set; }
-        //public bool nft { get; set; }
-        //public int amount { get; set; }
-        //public string itemURI { get; set; }
 
         public int GetAmount() => amount;
 

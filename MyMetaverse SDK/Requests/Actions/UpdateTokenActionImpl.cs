@@ -22,10 +22,6 @@ namespace MyMetaverse_SDK.Requests.Actions
 
         }
 
-        //public string GetTokenID() => tokenID;
-
-        //public string GetTokenIndex() => tokenIndex;
-
         public async Task<IResult<ITokenMetadata>> SaveChanges()
         {
             return await connector.ProcessRequest<ITokenMetadata,TokenMetadataEntity>(connector.FindRoute(Routes.Routes.UPDATE_TOKEN_DETAILS), endpointParams: new[] { tokenID }, jsonObject: requestBody);
